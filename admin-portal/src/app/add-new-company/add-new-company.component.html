@@ -1,0 +1,17 @@
+<div class="container">
+    <br>
+    <h2>Add New Company</h2>
+    <br>
+    <form action="/action_page.php" [formGroup]="companyref" (ngSubmit)= addNewCompany()>
+      <div class="form-group">
+        <label for="email">Company Name:</label>
+        <input type="email" class="form-control" id="email" formControlName="company" placeholder="Enter company name" name="name">
+      </div>
+      
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  {{result}}
+
+
+ 

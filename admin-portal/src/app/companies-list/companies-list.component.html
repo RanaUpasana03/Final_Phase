@@ -1,0 +1,42 @@
+<div class="container" *ngIf="listCompany">
+<br>
+  <button type="button" class="btn btn-info" (click)= "addNewCompany()">Add Company</button>
+
+    <table class="table">
+      
+        <thead class=" bg-dark text-white">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Company Name</th>
+            <th scope="col">Activity</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr  *ngFor="let company of companies;let rowIndex=index">
+            <td>{{rowIndex+1}}</td>
+            <td>{{company.company}}</td>
+            <td>
+              <button type="button" class="btn btn-success" (click)= "editCompany(rowIndex)"><i class="fas fa-edit"></i></button>
+            <button type="button" class="btn btn-danger" (click)= "deleteCompany(rowIndex)"><i class="far fa-trash-alt"></i></button>
+            </td>
+          </tr>
+          
+      </table>
+    
+</div>
+
+
+<div class="container" *ngIf="updateCompanyDiv">
+  <br>
+  <h2>Edit Company</h2>
+  <br>
+  <form action="/action_page.php" [formGroup]="companyref" (ngSubmit)= updateCompany(rowIndex)>
+    <div class="form-group">
+      <label for="email">Company Name:</label>
+      <input type="email" class="form-control" id="email" formControlName="company" placeholder="Enter company name" name="name">
+    </div>
+    
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+</div>

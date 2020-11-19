@@ -1,0 +1,66 @@
+<div class="container">
+    <br>
+      <button type="button" class="btn btn-info" (click)= "addNewProduct()">Add New Product</button>
+    
+        <table class="table">
+          
+            <thead class=" bg-dark text-white">
+              <tr>
+                <th>Product No.</th>
+                <th>Product Image</th>
+                <th>Product Name</th>
+                <th>Description</th> 
+                <th>Company</th> 
+                <th>Price</th> 
+                <th>Actions</th> 
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let p of products;let rowIndex=index">
+                <td>{{rowIndex+1}}</td>
+                <td><img src="{{p.image}}" height="100" width="100"/></td>
+                <td>{{p.name}}</td>
+                <td>{{p.description}}</td>
+               <td>{{p.company['company']}}</td>
+                <td>${{p.price}}</td>
+                <td  class="text-center">
+                    <button type="button" class="btn btn-success" (click)="editProduct(rowIndex)"><i class="fas fa-edit"></i></button> &nbsp;
+                  <button type="button" class="btn btn-danger" (click)="deleteProduct(rowIndex)"><i class="far fa-trash-alt"></i></button>
+                </td>
+        </tr>
+              
+          </table>
+        
+    </div>
+
+
+    <div class="container" *ngIf= "editProductDiv">
+  <form class="border border-light p-5" [formGroup]="productref" (ngSubmit)= "updateProduct(rowIndex)">
+
+    <p class="h4 mb-4 text-center">Edit Product</p>
+
+    <label for="textInput">Product Name</label>
+    <input type="text"  formControlName = "name" class="form-control mb-4" placeholder="Product Name">
+
+    <label for="textInput">Product Desription</label>
+    <input type="text" formControlName = "description" class="form-control mb-4" placeholder="Text input">
+
+    <label for="textInput">Product Image</label>
+    <input type="text" formControlName = "image" class="form-control mb-4" placeholder="Text input">
+
+    <label for="select">Company</label>
+    <select class="browser-default custom-select mb-4" formControlName = "company">
+        <option value="" disabled="" selected="">Choose your option</option>
+        <option *ngFor= "let c of companies" [value]= "c._id" ng.selected = "c.company === selectedCompany ? true: false">{{c.company}}</option>
+        
+    </select>
+
+    <label for="textInput">Price</label>
+    <input type="text" formControlName = "price" class="form-control mb-4" placeholder="Text input">
+
+    <button class="btn btn-info btn-block my-4" type="submit">submit</button>
+
+    
+</form>
+</div>
